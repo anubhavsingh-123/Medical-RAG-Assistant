@@ -1,130 +1,76 @@
-# Build-a-Complete-Medical-Chatbot-with-LLMs-LangChain-Pinecone-Flask-AWS
+🏥 Medical RAG Assistant
 
-# How to run?
-### STEPS:
+The Medical RAG Assistant is an AI-powered chatbot designed to answer medical questions using information stored inside a PDF book. It works by reading your PDF, breaking it into small pieces, storing them in Pinecone, and then using Google Gemini to generate accurate answers based on that information. This project helps you build your own smart medical question-answering system using RAG (Retrieval-Augmented Generation).
 
-Clone the repository
+📌 What this project does
 
-```bash
-git clonehttps://github.com/entbappy/Build-a-Complete-Medical-Chatbot-with-LLMs-LangChain-Pinecone-Flask-AWS.git
-```
-### STEP 01- Create a conda environment after opening the repository
+This assistant allows you to:
 
-```bash
+Upload a medical book (PDF)
+
+Break it into meaningful text chunks
+
+Convert those chunks into embeddings
+
+Store them inside Pinecone for fast searching
+
+Retrieve relevant content when you ask questions
+
+Generate final answers using Google Gemini AI
+
+Chat using a clean and modern web interface
+
+The goal is to give you a chatbot that does not guess answers, but instead uses your actual medical data.
+
+🧠 How it works (in simple words)
+
+You add your medical PDF into the data/ folder.
+
+The script store_index.py reads the PDF and sends the processed text into Pinecone.
+
+When you ask a question, the chatbot searches Pinecone for the best matching information.
+
+Gemini takes that information and creates a meaningful answer.
+
+The response is shown in your chatbot interface in the browser.
+
+🚀 How to set everything up
+
+You need Python and a virtual environment.
+
+Step 1: Create environment
 conda create -n medibot python=3.10 -y
-```
-
-```bash
 conda activate medibot
-```
 
-
-### STEP 02- install the requirements
-```bash
+Step 2: Install the required packages
 pip install -r requirements.txt
-```
 
+Step 3: Add your API keys in a .env file
+PINECONE_API_KEY=your_key_here
+GOOGLE_API_KEY=your_key_here
 
-### Create a `.env` file in the root directory and add your Pinecone & openai credentials as follows:
+Step 4: Upload your PDF
 
-```ini
-PINECONE_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-OPENAI_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
+Place your book inside:
 
+data/Medical_book.pdf
 
-```bash
-# run the following command to store embeddings to pinecone
+Step 5: Send the PDF to Pinecone
+
+Run:
+
 python store_index.py
-```
 
-```bash
-# Finally run the following command
+
+You should see a success message indicating that the embeddings were stored.
+
+Step 6: Start the chatbot
 python app.py
-```
-
-Now,
-```bash
-open up localhost:
-```
 
 
-### Techstack Used:
+Now open the browser and visit:
 
-- Python
-- LangChain
-- Flask
-- GPT
-- Pinecone
+http://127.0.0.1:8080
 
 
-
-# AWS-CICD-Deployment-with-Github-Actions
-
-## 1. Login to AWS console.
-
-## 2. Create IAM user for deployment
-
-	#with specific access
-
-	1. EC2 access : It is virtual machine
-
-	2. ECR: Elastic Container registry to save your docker image in aws
-
-
-	#Description: About the deployment
-
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-   - AWS_ACCESS_KEY_ID
-   - AWS_SECRET_ACCESS_KEY
-   - AWS_DEFAULT_REGION
-   - ECR_REPO
-   - PINECONE_API_KEY
-   - OPENAI_API_KEY
+You will see your chatbot ready to use.
