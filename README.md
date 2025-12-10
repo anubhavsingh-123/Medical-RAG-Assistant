@@ -62,7 +62,7 @@ Run:
 python store_index.py
 
 
-You should see a success message indicating that the embeddings were stored.
+
 
 Step 6: Start the chatbot
 python app.py
